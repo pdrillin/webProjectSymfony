@@ -1,0 +1,20 @@
+name: webapp
+
+services:
+  php:
+    restart: unless-stopped
+    image: php:8.3-fpm-alpine
+    volumes:
+      - ./:var/www/:delegate
+    environment:
+      APP_ENV: dev
+
+  mysql:
+    image:  mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROO_PASSWORD: root
+      MYSQL_DATABASE: dbwebapp
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
